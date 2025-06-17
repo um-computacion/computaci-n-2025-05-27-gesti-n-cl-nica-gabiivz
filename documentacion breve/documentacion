@@ -1,0 +1,30 @@
+Documentación breve de:
+   - Cómo ejecutar el sistema.
+   Para ejecutar el sistema, trabajé con la clase CLI, ubicada dentro de la carpeta src. Como los archivos están organizados en distintos módulos, tuve que configurar el path para que Python reconozca correctamente los imports entre ellos.
+   Para esto, al inicio del archivo CLI.py, agregué los siguientes comandos:
+   import sys
+    import os
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    Luego, desde la terminal, utilicé el siguiente comando para ejecutar el programa:python src/CLI.py 
+   - Cómo ejecutar las pruebas.
+   Primero abrí una terminal y entré al directorio:
+   C:\Users\gabri\OneDrive\Escritorio\trabajo computacion\computaci-n-2025-05-27-gesti-n-cl-nica-gabiivz>
+   Luego ejecuté cada test para ver los errores de cada clase, para poder resolverlos de manera ordenada con:
+   C:\Users\gabri\OneDrive\Escritorio\trabajo computacion\computaci-n-2025-05-27-gesti-n-cl-nica-gabiivz> python -m unittest tests/test_nombre.de.cada.clase.py
+   Una vez revisadas las clases ejecute todos los tests con: 
+   C:\Users\gabri\OneDrive\Escritorio\trabajo computacion\computaci-n-2025-05-27-gesti-n-cl-nica-gabiivz> python -m unittest 
+   - Explicación de diseño general.
+   Este es un sistema de gestion de una clínica que nos ayuda justamente para la gestion de una clase a través de clase, en nuestro caso usamos 8.
+   Este sistema usa enfoques orientados a objetos para relacionarlos con la clínica. 
+   Las clases que realicé sonÑ
+   Turno: Nos guarda los turnos agendados con los pacientes, la hora y fecha de este, el medico de la especialidad que necesite el paciente y los días que atiende el médico.
+   Receta: Nos da una receta médica que realiaza un médico para un paciente y incluye todos los medicamentados que necesita el paciente.
+   Paciente: Nos proporciona los datos del paciente como: DNI, el nombre y el apellido y su historial clínica.
+   Medico: nos da el nombre del médico, su matrícula y su/sus especialidad
+   HistoriaClinica: Nos muestra la historia clínica de un paciente, que tienen recetas asociados y turnos.
+   Especialidad: Nos muestra la especialidad del médico y que días atiende con esa especialidad.
+   Clinica: Es la clase principal que dirige médicos,recetas y turnos. Nos muestra los metodos para agregar médicos y pacientes, emitir recetas, agendar turnos y para obtener historias clinicas.
+   CLI: Para que los usuarios puedan comunicarse con la clínica mediante la interfaz por línea de comandos. El CLI ofrece opciones para programar turnos, registrar médicos, agendar pacientes, consultar historiales médicos, revisar pacientes, turnos y médicos registrados, y emitir recetas.
+   Este sistema posibilita incorporar nuevas características sin afectar la estructura actual, además implementamos controles para prevenir duplicaciones de doctores y pacientes.
+   Cada clase cuenta con sus respectivas pruebas para verificar el funcionamiento de los métodos, confirmando que se cumplan todos los requerimientos.
+

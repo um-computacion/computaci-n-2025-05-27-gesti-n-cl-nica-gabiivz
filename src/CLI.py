@@ -122,13 +122,10 @@ class CLI:
             fecha_hora_str = input("Ingrese fecha y hora (dd/mm/aaaa hh:mm): ")
             fecha_hora = datetime.strptime(fecha_hora_str, "%d/%m/%Y %H:%M")
             
-            # Preguntar si quiere especialidad específica
             usar_especialidad = input("¿Desea especificar una especialidad? (s/n): ").lower()
             especialidad_solicitada = None
             if usar_especialidad == 's':
                 especialidad_solicitada = input("Ingrese la especialidad deseada: ")
-            
-            # Corrección: agendar_turno tiene parámetros en orden diferente
             turno = self.clinica.agendar_turno(dni, matricula, fecha_hora, especialidad_solicitada)
             print("Turno agendado exitosamente.")
             print(f"Turno: {turno}")

@@ -10,8 +10,7 @@ class TestClinica(unittest.TestCase):
 
     def setUp(self):
         self.clinica = Clinica()
-        # Corregido: usar el constructor consistentemente
-        self.medico = Medico("Dra. García", "M001")  # nombre, matricula
+        self.medico = Medico("Dra. García", "M001")  
         self.clinica.agregar_medico(self.medico)
         self.paciente = Paciente("12345678", "Juan Perez", "15/05/1990")
         self.especialidad = Especialidad("Cardiología", ["lunes", "miércoles"])
@@ -57,7 +56,7 @@ class TestClinica(unittest.TestCase):
             self.clinica.agendar_turno("12345678", "M003", datetime(2025, 6, 16, 10, 0), "Cardiología")
 
     def test_agendar_turno_dia_no_disponible(self):
-        fecha_martes = datetime(2025, 6, 17, 10, 0)  # Martes
+        fecha_martes = datetime(2025, 6, 17, 10, 0)  
         with self.assertRaises(TurnoNoDisponibleException):
             self.clinica.agendar_turno("12345678", "M001", fecha_martes, "Cardiología")
 
@@ -72,7 +71,7 @@ class TestClinica(unittest.TestCase):
             self.clinica.agendar_turno("87654321", "M001", fecha, "Cardiología")
 
     def test_agendar_turno_sin_especialidad_especifica(self):
-        fecha = datetime(2025, 6, 16, 10, 0)  # Lunes
+        fecha = datetime(2025, 6, 16, 10, 0)  
         turno = self.clinica.agendar_turno("12345678", "M001", fecha)  
         self.assertEqual(turno.obtener_fecha(), fecha)
 
@@ -101,7 +100,7 @@ class TestClinica(unittest.TestCase):
             self.clinica.obtener_historia_clinica("99999999")
 
     def test_obtener_medico_por_matricula(self):
-        # Corregido: no crear un médico duplicado, usar el que ya existe
+
         medico_obtenido = self.clinica.obtener_medico_por_matricula("M001")
         self.assertEqual(medico_obtenido.obtener_matricula(), "M001")
 
@@ -122,19 +121,19 @@ class TestClinica(unittest.TestCase):
         self.assertEqual(clinica_vacia.obtener_turnos(), [])
 
     def test_obtener_dia_semana_en_espanol(self):
-        fecha = datetime(2025, 6, 16)  # Lunes
+        fecha = datetime(2025, 6, 16)  
         dia = self.clinica.obtener_dia_semana_en_espanol(fecha)
         self.assertEqual(dia, "lunes")
 
     def test_validar_existencia_paciente(self):
-        # Crear nueva clínica para test limpio
+
         clinica_test = Clinica()
         self.assertFalse(clinica_test.validar_existencia_paciente("12345678"))
         clinica_test.agregar_paciente(self.paciente)
         self.assertTrue(clinica_test.validar_existencia_paciente("12345678"))
 
     def test_validar_existencia_medico_robusto(self):
-        # Crear nueva clínica para test limpio
+
         clinica_test = Clinica()
         matricula_medico = self.medico.obtener_matricula()
         self.assertFalse(clinica_test.validar_existencia_medico(matricula_medico))
@@ -150,11 +149,11 @@ class TestClinica(unittest.TestCase):
         self.assertIn("no está disponible", resultado)
 
     def test_validar_especialidad_en_dia(self):
-        # Día disponible
+
         self.assertTrue(self.clinica.validar_especialidad_en_dia(self.medico, "Cardiología", "lunes"))
-        # Día no disponible
+
         self.assertFalse(self.clinica.validar_especialidad_en_dia(self.medico, "Cardiología", "martes"))
-        # Especialidad no existente
+
         self.assertFalse(self.clinica.validar_especialidad_en_dia(self.medico, "Neurología", "lunes"))
 
     def test_str_clinica(self):
@@ -164,7 +163,7 @@ class TestClinica(unittest.TestCase):
         self.assertIn("Turnos: 0", str_resultado)
 
     def test_historia_clinica_se_crea_al_agregar_paciente(self):
-        # La historia clínica debe existir automáticamente
+        
         historia = self.clinica.obtener_historia_clinica("12345678")
         self.assertIsNotNone(historia)
         self.assertEqual(historia.obtener_paciente(), self.paciente)
